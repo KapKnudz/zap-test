@@ -1,3 +1,7 @@
+To install material-ui:
+npm install @material-ui/core
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
