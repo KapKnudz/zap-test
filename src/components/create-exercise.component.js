@@ -92,7 +92,7 @@ onSubmit(e) {
           <div className="form-group">
             <FormControl>
               <InputLabel id="select-username-label">Username: </InputLabel>
-              <Select 
+              <Select
                   required
                   labelId="select-username-label"
                   className="form-control"
@@ -110,7 +110,7 @@ onSubmit(e) {
             </FormControl>
           </div>
           <div className="form-group">
-            <TextField  
+            <TextField
                 required
                 label="Description:"
                 className="form-control"

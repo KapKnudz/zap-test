@@ -31,7 +31,7 @@ export class UsersService {
   }
     async fetchUsers() {
     const users = await this.userModel.find();
-  //  console.log(result);
+//    console.log(users);
     return users as User[];
   }
   async fetchSingleUser(username) {
