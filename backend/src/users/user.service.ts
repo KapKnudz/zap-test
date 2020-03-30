@@ -1,5 +1,6 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
+//import {InjectModule} from '@types/mongoose'
 import {User} from './user.model';
 import {Model} from 'mongoose';
 
@@ -11,14 +12,22 @@ export class UsersService {
 
    async insertUser(username: string) {
     //const userId = new Date().toString();
-    const existingUser = this.users.find(usern => usern.username === username);
-    if(existingUser ){
-    return 'Username unavailable';
-    }
+    // try {
+    //   const user = this.userModel.findOne({username}).exec();
+    //  } catch(error){
+    // throw new NotFoundException('Username unavailable');
+  //  }
+  let result;
+  try{
     const newUser = new this.userModel({username});
     const result = await newUser.save();
-    console.log(result);
-      return result.username as string;
+    return result.username as string;
+  }catch(error){
+    throw new NotFoundException('Username already exists!')
+  }
+
+  //  console.log(result);
+
   }
     async fetchUsers() {
     const users = await this.userModel.find();
@@ -38,19 +47,25 @@ export class UsersService {
     updatedUser.save();
   }
 
-  deleteUser(username: string){
-    const user = this.findUser(username)[1];
-    this.users.splice(user, 1);
+  async deleteUser(username: string){
+    await this.userModel.deleteOne({username: username}).exec();
+    // const user = this.findUser(username)[1];
+    // this.users.splice(user, 1);
   }
 
   private async findUser(username: string): Promise <User>{
-    const user = await this.userModel.findOne({username});
+    let user;
+    try {
+       user = await this.userModel.findOne({username}).exec();
   //   const userIndex = this.users.findIndex(usern => usern.username === username);
   // //  console.log(userIndex);
   //   const user = this.users[userIndex];
-    if(!user){
+          } catch(error){
       throw new NotFoundException('Could not find user');
     }
+    if(!user){
+      throw new NotFoundException('Could not find user');
+      }
     return user;
   }
 

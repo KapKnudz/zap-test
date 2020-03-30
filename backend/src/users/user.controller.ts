@@ -6,10 +6,10 @@ export class UserController {
   constructor(private usersService: UsersService ) {}
 
     @Post()
-    addUser(
+  async addUser(
       @Body('username') username: string,
     ){
-      const generatedUsername = this.usersService.insertUser(username);
+      const generatedUsername = await this.usersService.insertUser(username);
       return {username: generatedUsername};
 
   }
@@ -23,18 +23,18 @@ export class UserController {
     return users;
   }
   @Patch(':username')
-  updateUser(
+  async updateUser(
     @Param('username') username: string,
     @Body('username') newusername: string,
 
   ){
-      this.usersService.updateUser(username, newusername);
+    await this.usersService.updateUser(username, newusername);
       return null;
   }
   @Delete(':username')
-  removeUser(
+  async removeUser(
     @Param('username') username: string,) {
-      this.usersService.deleteUser(username);
+      await this.usersService.deleteUser(username);
       return null;
     }
 

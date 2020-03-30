@@ -5,7 +5,7 @@ export const UserSchema = new mongoose.Schema({
 
 })
 
-export interface User {
+export interface User extends mongoose.Document {
      username: string,
   //  public unique: true,
    };
