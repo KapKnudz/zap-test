@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { Typography, TextField, Select, InputLabel, FormControl, MenuItem, Button} from '@material-ui/core';
+
+
 
 export default class CreateExercise extends Component {
 constructor(props) {
@@ -16,7 +19,7 @@ constructor(props) {
     this.state = {
       username: '',
       description: '',
-      duration: 0,
+      duration: '',
       date: new Date(),
       users: []
     }
@@ -84,38 +87,41 @@ onSubmit(e) {
   render() {
     return (
       <div>
-        <h3>Create New Exercise Log</h3>
+        <Typography variant="h4" color="primary">Create New Exercise Log</Typography>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>Username: </label>
-            <select ref="userInput"
-                required
-                className="form-control"
-                value={this.state.username}
-                onChange={this.onChangeUsername}>
-                {
-                  this.state.users.map(function(user) {
-                    return <option
-                      key={user}
-                      value={user}>{user}
-                      </option>;
-                  })
-                }
-            </select>
+            <FormControl>
+              <InputLabel id="select-username-label">Username: </InputLabel>
+              <Select 
+                  required
+                  labelId="select-username-label"
+                  className="form-control"
+                  value={this.state.username}
+                  onChange={this.onChangeUsername}>
+                  {
+                    this.state.users.map(function(user) {
+                      return <MenuItem
+                        key={user}
+                        value={user}>{user}
+                        </MenuItem>;
+                    })
+                  }
+              </Select>
+            </FormControl>
           </div>
           <div className="form-group">
-            <label>Description: </label>
-            <input  type="text"
+            <TextField  
                 required
+                label="Description:"
                 className="form-control"
                 value={this.state.description}
                 onChange={this.onChangeDescription}
                 />
+
           </div>
           <div className="form-group">
-            <label>Duration (in minutes): </label>
-            <input
-                type="text"
+            <TextField
+                label="Duration (in minutes): "
                 className="form-control"
                 value={this.state.duration}
                 onChange={this.onChangeDuration}
@@ -125,14 +131,22 @@ onSubmit(e) {
             <label>Date: </label>
             <div>
               <DatePicker
+                label="Date"
                 selected={this.state.date}
                 onChange={this.onChangeDate}
               />
             </div>
           </div>
-
-          <div className="form-group">
-            <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
+          <div>
+          <Button
+            type="submit"
+            className="btn btn-primary"
+            color='secondary'
+            size='large'
+            variant='contained'
+            >
+              Create Exercise Log
+          </Button>
           </div>
         </form>
       </div>
