@@ -95,22 +95,22 @@ onSubmit(e) {
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <FormControl>
-              <InputLabel id="select-username-label">Username: </InputLabel>
-              <Select
+              <label id="select-username-label">Username: </label>
+              <select
+                  defaultValue=''
                   required
-                  labelId="select-username-label"
                   className="form-control"
-                  value={this.state.username}
+                  value={this.state.users.username}
                   onChange={this.onChangeUsername}>
                   {
                     this.state.users.map(function(user) {
-                      return <MenuItem
+                      return <option
                         key={user}
                         value={user}>{user}
-                        </MenuItem>;
+                        </option>;
                     })
                   }
-              </Select>
+              </select>
             </FormControl>
           </div>
           <div className="form-group">

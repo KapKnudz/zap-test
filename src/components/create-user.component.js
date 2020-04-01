@@ -59,7 +59,7 @@ export default class CreateUser extends Component {
         <input  type="text"
             required
             className="form-control"
-            value={this.state.username}
+            value={this.state.users.username}
             onChange={this.onChangeUsername}
             />
       </div>
