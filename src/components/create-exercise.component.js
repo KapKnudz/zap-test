@@ -78,10 +78,14 @@ onSubmit(e) {
   }
   console.log(exercise);
 
-  axios.post('http://localhost:5000/exercises/add', exercise)
-    .then(res => console.log(res.data));
+  axios.post('http://localhost:5000/exerciseLogs/add', exercise)
+  .then((res) => {
+    console.log(res.data);
+  }, (error) => {
+    console.log(error);
+  });
 
-  window.location = '/'; // take user back to list of exercise after submit
+//  window.location = '/'; // take user back to list of exercise after submit
 }
 
   render() {

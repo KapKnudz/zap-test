@@ -25,6 +25,7 @@ export default class CreateUser extends Component {
 
     onSubmit(e) {
       e.preventDefault();
+  //    console.log('hej');
 
       const user = {
         username: this.state.username,
@@ -34,8 +35,12 @@ export default class CreateUser extends Component {
       }
       console.log(user);
 
-      axios.post('http://localhost:5000/users/add', user) //post request till backend endpoint
-        .then(res => console.log(res.data));
+      axios.post('http://localhost:5000/users/add', user)
+      .then((res) => {
+        console.log(res.data);
+      }, (error) => {
+        console.log(error);
+      });  //post request till backend endpoint
 
       this.setState({
         username: ''

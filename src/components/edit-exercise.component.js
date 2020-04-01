@@ -24,18 +24,18 @@ export default class EditExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/exercises/'+this.props.match.params.id)
-      .then(response => {
-        this.setState({
-          username: response.data.username,
-          description: response.data.description,
-          duration: response.data.duration,
-          date: new Date(response.data.date)
-        })   
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+    // axios.get('http://localhost:5000/exerciseLogs/'+this.props.match.params.id)
+    //   .then(response => {
+    //     this.setState({
+    //       username: response.data.username,
+    //       description: response.data.description,
+    //       duration: response.data.duration,
+    //       date: new Date(response.data.date)
+    //     })
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   })
 
     axios.get('http://localhost:5000/users/')
       .then(response => {
@@ -88,10 +88,11 @@ export default class EditExercise extends Component {
 
     console.log(exercise);
 
-    axios.post('http://localhost:5000/exercises/update/' + this.props.match.params.id, exercise)
+
+    axios.patch('http://localhost:5000/exerciseLogs/' + exercise.username, exercise)
       .then(res => console.log(res.data));
 
-    window.location = '/';
+//    window.location = '/';
   }
 
 
@@ -102,20 +103,20 @@ export default class EditExercise extends Component {
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Username: </label>
-            <select ref="userInput"
-                required
-                className="form-control"
-                value={this.state.username}
-                onChange={this.onChangeUsername}>
-                {
-                  this.state.users.map(function(user) {
-                    return <option
-                      key={user}
-                      value={user}>{user}
-                      </option>;
-                  })
-                }
-            </select>
+              <select //ref="userInput"
+                  required
+                  className="form-control"
+                 value={this.state.users}
+                  onChange={this.onChangeUsername}>
+                  {
+                    this.state.users.map(function(user) {
+                      return <option
+                        key={user}
+                        value={user}>{user}
+                        </option>;
+                    })
+                  }
+              </select>
           </div>
           <div className="form-group">
             <label>Description: </label>
@@ -148,9 +149,9 @@ export default class EditExercise extends Component {
           <div className="form-group">
             <input type="submit" value="Edit Exercise Log" className="btn btn-primary" />
           </div>
-          
 
-          
+
+
         </form>
       </div>
     )

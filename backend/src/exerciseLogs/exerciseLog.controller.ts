@@ -1,11 +1,11 @@
 import {Controller, Post, Body, Get, Param, Patch, Delete} from '@nestjs/common';
 import {ExerciseLogsService} from './exerciseLog.service';
 
-@Controller('create')
+@Controller('exerciseLogs')
 export class ExerciseLogController {
   constructor(private exerciseLogsService: ExerciseLogsService ) {}
 
-    @Post()
+    @Post('add')
     async addExerciseLog(
       @Body('username') username: string,
       @Body('description') description: string,
